@@ -1,0 +1,33 @@
+languageCode = "en-us"
+title = "Nrehearsal"
+theme = "crab"
+baseurl = "https://blog.return0.top/"
+
+[params]
+description = "Life has no rehearsal"
+logoimage = "img/logo.jpg"
+copyright = "@return0.top"
+
+# mathjax = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"
+## Uncomment if you want mathjax enabled. The above cdn source is taken from https://gohugo.io/content-management/formats/#mathjax-with-hugo   
+
+[permalinks]
+blog  = "/blog/:year/:month/:title/"
+
+[taxonomies]
+tags = "tags"
+
+[[menu.main]]
+weight = 1
+name = "Home"
+url = "/"
+
+[[menu.main]]
+weight = 2
+name = "Blog"
+url = "/blog/"
+
+[[menu.main]]
+weight = 4
+name = "Contact"
+url = "/contact/"

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Nrehearsal</title>
+    <link>https://blog.return0.top/</link>
+    <description>Recent content on Nrehearsal</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 27 Mar 2017 21:30:00 +0100</lastBuildDate>
+    
+	<atom:link href="https://blog.return0.top/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Welcome to my blog</title>
+      <link>https://blog.return0.top/blog/2017/03/welcome-to-my-blog/</link>
+      <pubDate>Mon, 27 Mar 2017 21:30:00 +0100</pubDate>
+      
+      <guid>https://blog.return0.top/blog/2017/03/welcome-to-my-blog/</guid>
+      <description>This page is intended to give you a feeling of what a blog post looks like. Crab supports both fixed (static) pages as well as blog posts.
+In order to make blog pages work correctly, you need proper permalinks settings in your site&amp;rsquo;s config.toml.
+Hugo will then treat all files in the blog directory (for example) like blog posts.
+Have a look at the config.toml provided with this example site, as well as the page about Permalinks from the Hugo docs.</description>
+    </item>
+    
+    <item>
+      <title>Contact</title>
+      <link>https://blog.return0.top/contact/</link>
+      <pubDate>Sat, 18 Mar 2017 10:59:56 +0100</pubDate>
+      
+      <guid>https://blog.return0.top/contact/</guid>
+      <description>你可以通过如下方式联系我:
+ Eamil: myself@return0.top
+Github: Nrehearsal
+ 有任何问题都可以给我发邮件，希望我的博客能够帮助到你。
+感谢来访！
+ 部分素材来自网络，如有侵权，请联系删除。</description>
+    </item>
+    
+    <item>
+      <title>More blogging</title>
+      <link>https://blog.return0.top/blog/2017/02/more-blogging/</link>
+      <pubDate>Mon, 27 Feb 2017 21:30:00 +0100</pubDate>
+      
+      <guid>https://blog.return0.top/blog/2017/02/more-blogging/</guid>
+      <description>This is yet another blog post to demonstrate the blog feature. It&amp;rsquo;s from a different month than other posts, to show you how the archive feature works.</description>
+    </item>
+    
+    <item>
+      <title>Home</title>
+      <link>https://blog.return0.top/home/</link>
+      <pubDate>Sun, 05 Feb 2017 07:51:49 +0100</pubDate>
+      
+      <guid>https://blog.return0.top/home/</guid>
+      <description>最近读到的书:&amp;nbsp; 我们趋行在人生这个亘古的旅途，在坎坷中奔跑，在挫折里涅槃，忧愁缠满全身， 痛苦飘洒一地。我们累，却无从止歇；我们苦，却无法回避——加西亚·马尔克斯《百年孤独》
+ 我是一个二十出头的程序员
+我的研究方向:
+ LinuxC程序开发 Golang开发 网络编程 DevOps  关于Nrehearsal:
+ 生命没有彩排，因为时光只会放映一次。 我也不知道这些年来是否演绎了最完美的自己，可是时代的车轮总是滚滚向前， 我也只能马不停歇地奔跑，才能有看见光明的机会，否则我就只能被车轮卷起的尘埃包围。 其实生命中真正重要的不是你遭遇了什么，而是你记住了哪些事，又是如何铭记的。
+ </description>
+    </item>
+    
+  </channel>
+</rss>
