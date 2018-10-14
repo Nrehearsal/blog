@@ -6,21 +6,31 @@
     <description>Recent content on Nrehearsal</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 27 Mar 2017 21:30:00 +0100</lastBuildDate>
+    <lastBuildDate>Sun, 14 Oct 2018 15:49:58 +0800</lastBuildDate>
     
 	<atom:link href="https://blog.return0.top/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>Welcome to my blog</title>
-      <link>https://blog.return0.top/blog/2017/03/welcome-to-my-blog/</link>
-      <pubDate>Mon, 27 Mar 2017 21:30:00 +0100</pubDate>
+      <title>如何使用Hugo和GithubPages搭建和管理个人博客</title>
+      <link>https://blog.return0.top/blog/2018/10/%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8hugo%E5%92%8Cgithubpages%E6%90%AD%E5%BB%BA%E5%92%8C%E7%AE%A1%E7%90%86%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/</link>
+      <pubDate>Sun, 14 Oct 2018 15:49:58 +0800</pubDate>
       
-      <guid>https://blog.return0.top/blog/2017/03/welcome-to-my-blog/</guid>
-      <description>This page is intended to give you a feeling of what a blog post looks like. Crab supports both fixed (static) pages as well as blog posts.
-In order to make blog pages work correctly, you need proper permalinks settings in your site&amp;rsquo;s config.toml.
-Hugo will then treat all files in the blog directory (for example) like blog posts.
-Have a look at the config.toml provided with this example site, as well as the page about Permalinks from the Hugo docs.</description>
+      <guid>https://blog.return0.top/blog/2018/10/%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8hugo%E5%92%8Cgithubpages%E6%90%AD%E5%BB%BA%E5%92%8C%E7%AE%A1%E7%90%86%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/</guid>
+      <description>死会引人哭泣。虽则如此，人生的三分之一却在睡眠中打发掉了。——拜伦
+  Hugo是由Go语言实现的静态网站生成。 具有简单、易用、高效、易扩展、快速部署等优点。可将markdown格式的文本结合自定义的主题生成静态的html。
+GithubPages是一个静态站点托管服务，旨在直接从GitHub存储库托管您的个人，组织或项目页面。
+Hugo+GithubPages相比于传统的博客系统有以下优点：
+ 低成本:&amp;nbsp; 无需单独购买VSP服务器或者域名空间，并且不限流量。
+ 高度定制化：可以方便的定义网站功能模块，增加个性化功能。
+ 方便管理:&amp;nbsp; 由于不需要使用数据库，所有数据均以md形式保存，可直接使用git
+ 行管理，对于博客系统尤其适用。
+ 更专业:&amp;nbsp; 对于开源项目的文档，可以使用git与项目版本同步。
+  
+安装Hugo:  使用yum, apt-get, brew安装 通过源码安装
+ 安装golang，并配置$GOPATH 编译安装hugo
+$ git clone https://github.com/gohugoio/hugo.git $ cd hugo $ go install $ which hugo //验证安装    如何使用Hugo:  创建博客模板
+$ hugo new site blog //创建一个新站点 $ cd blog $ tree blog #blog #├── archetypes #│ └── default.</description>
     </item>
     
     <item>
@@ -38,22 +48,13 @@ Github: Nrehearsal
     </item>
     
     <item>
-      <title>More blogging</title>
-      <link>https://blog.return0.top/blog/2017/02/more-blogging/</link>
-      <pubDate>Mon, 27 Feb 2017 21:30:00 +0100</pubDate>
-      
-      <guid>https://blog.return0.top/blog/2017/02/more-blogging/</guid>
-      <description>This is yet another blog post to demonstrate the blog feature. It&amp;rsquo;s from a different month than other posts, to show you how the archive feature works.</description>
-    </item>
-    
-    <item>
       <title>Home</title>
       <link>https://blog.return0.top/home/</link>
       <pubDate>Sun, 05 Feb 2017 07:51:49 +0100</pubDate>
       
       <guid>https://blog.return0.top/home/</guid>
-      <description>最近读到的书:&amp;nbsp; 我们趋行在人生这个亘古的旅途，在坎坷中奔跑，在挫折里涅槃，忧愁缠满全身， 痛苦飘洒一地。我们累，却无从止歇；我们苦，却无法回避——加西亚·马尔克斯《百年孤独》
- 我是一个二十出头的程序员
+      <description> 最近读到的书:&amp;nbsp; 我们趋行在人生这个亘古的旅途，在坎坷中奔跑，在挫折里涅槃，忧愁缠满全身， 痛苦飘洒一地。我们累，却无从止歇；我们苦，却无法回避——加西亚·马尔克斯《百年孤独》
+  我是一个二十出头的程序员
 我的研究方向:
  LinuxC程序开发 Golang开发 网络编程 DevOps  关于Nrehearsal:
  生命没有彩排，因为时光只会放映一次。 我也不知道这些年来是否演绎了最完美的自己，可是时代的车轮总是滚滚向前， 我也只能马不停歇地奔跑，才能有看见光明的机会，否则我就只能被车轮卷起的尘埃包围。 其实生命中真正重要的不是你遭遇了什么，而是你记住了哪些事，又是如何铭记的。

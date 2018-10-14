@@ -56,42 +56,27 @@
 
 
   
-    <h2><a href="https://blog.return0.top/blog/2017/03/welcome-to-my-blog/">Welcome to my blog</a></h2>
-    <p class="timestamp">March 27, 2017</p>
+    <h2><a href="https://blog.return0.top/blog/2018/10/%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8hugo%E5%92%8Cgithubpages%E6%90%AD%E5%BB%BA%E5%92%8C%E7%AE%A1%E7%90%86%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/">如何使用Hugo和GithubPages搭建和管理个人博客</a></h2>
+    <p class="timestamp">October 14, 2018</p>
     <div class="content">
-    This page is intended to give you a feeling of what a blog post looks like. Crab supports both fixed (static) pages as well as blog posts.
-In order to make blog pages work correctly, you need proper permalinks settings in your site&rsquo;s config.toml.
-Hugo will then treat all files in the blog directory (for example) like blog posts.
-Have a look at the config.toml provided with this example site, as well as the page about Permalinks from the Hugo docs.
+    死会引人哭泣。虽则如此，人生的三分之一却在睡眠中打发掉了。——拜伦
+  Hugo是由Go语言实现的静态网站生成。 具有简单、易用、高效、易扩展、快速部署等优点。可将markdown格式的文本结合自定义的主题生成静态的html。
+GithubPages是一个静态站点托管服务，旨在直接从GitHub存储库托管您的个人，组织或项目页面。
+Hugo+GithubPages相比于传统的博客系统有以下优点：
+ 低成本:&nbsp; 无需单独购买VSP服务器或者域名空间，并且不限流量。
+ 高度定制化：可以方便的定义网站功能模块，增加个性化功能。
+ 方便管理:&nbsp; 由于不需要使用数据库，所有数据均以md形式保存，可直接使用git
+ 行管理，对于博客系统尤其适用。
+ 更专业:&nbsp; 对于开源项目的文档，可以使用git与项目版本同步。
+  
+安装Hugo:  使用yum, apt-get, brew安装 通过源码安装
+ 安装golang，并配置$GOPATH 编译安装hugo
+$ git clone https://github.com/gohugoio/hugo.git $ cd hugo $ go install $ which hugo //验证安装    如何使用Hugo:  创建博客模板
+$ hugo new site blog //创建一个新站点 $ cd blog $ tree blog #blog #├── archetypes #│ └── default.
     
-      ... <a href="https://blog.return0.top/blog/2017/03/welcome-to-my-blog/">Read more &hellip;</a>
+      ... <a href="https://blog.return0.top/blog/2018/10/%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8hugo%E5%92%8Cgithubpages%E6%90%AD%E5%BB%BA%E5%92%8C%E7%AE%A1%E7%90%86%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/">Read more &hellip;</a>
     
     </div>
-    
-  
-    <h2><a href="https://blog.return0.top/blog/2017/02/more-blogging/">More blogging</a></h2>
-    <p class="timestamp">February 27, 2017</p>
-    <div class="content">
-    This is yet another blog post to demonstrate the blog feature. It&rsquo;s from a different month than other posts, to show you how the archive feature works.
-    
-    </div>
-    
-      <p class="tags">
-  Tags: 
-  <a href="https://blog.return0.top/tags/this">this</a>
-  
-  <a href="https://blog.return0.top/tags/post">post</a>
-  
-  <a href="https://blog.return0.top/tags/also">also</a>
-  
-  <a href="https://blog.return0.top/tags/has">has</a>
-  
-  <a href="https://blog.return0.top/tags/some">some</a>
-  
-  <a href="https://blog.return0.top/tags/tags">tags</a>
-  
-</p>
-
     
   
   
