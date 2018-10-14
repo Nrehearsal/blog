@@ -13,15 +13,14 @@ draft: false
 
 [**GithubPages**](https://help.github.com/articles/what-is-github-pages/)是一个静态站点托管服务，旨在直接从GitHub存储库托管您的个人，组织或项目页面。
 
-Hugo+GithubPages相比于传统的博客系统有以下优点：
+Hugo+GithubPages的方案相比于传统的博客系统有以下优点：
 
 - 低成本:&nbsp; 无需单独购买VSP服务器或者域名空间，并且不限流量。
 
 - 高度定制化：可以方便的定义网站功能模块，增加个性化功能。
 
 - 方便管理:&nbsp; 由于不需要使用数据库，所有数据均以md形式保存，可直接使用git
-
-- 行管理，对于博客系统尤其适用。
+行管理，对于博客系统尤其适用。
 
 - 更专业:&nbsp; 对于开源项目的文档，可以使用git与项目版本同步。
 
@@ -76,7 +75,7 @@ Hugo+GithubPages相比于传统的博客系统有以下优点：
     $ cd blog/
     $ hugo serve -w
     ```
-    访问```http://localhost:1313/```， 即可查看的Demo网站。
+    访问```http://localhost:1313/```， 即可查看的Demo网站
 - 构建自己的网站
     - 根据主题帮助文档修改config.toml内容为自己网站的相关信息
     - 根据content结构创建对应的md文件，例如:
@@ -85,12 +84,12 @@ Hugo+GithubPages相比于传统的博客系统有以下优点：
         $ cd blog/
         $ hugo new blog/first_blog.md
         ```
-    - 编辑first_blog.md，添加自定义内容，并执行```hugo serve -w ```，即可在浏览器查看到新增的博客文章。
+    - 编辑first_blog.md，添加自定义内容，并执行```hugo serve -w ```，即可在浏览器查看到新增的博客文章
 	
 ### **部署到GitHubPages**: 
 - 创建一个公开的仓库blog
 - 本地构建站点配置，以及静态html文件
-   - 构建站点：
+   - 构建站点
         ```sh
         $ mkdir blog
         $ cd blog
@@ -105,7 +104,7 @@ Hugo+GithubPages相比于传统的博客系统有以下优点：
         $ cd hugo_blog
         #配置站点，添加体定义内容md文件
         ```
-        测试站点是否正常，并构建静态文件
+    - 测试站点是否正常，并构建静态文件
         ```sh
         $ cd hugo_blog
         $ hugo serve -w //测试站点是否配置正确，自定义内容是否添加成功
@@ -122,7 +121,7 @@ Hugo+GithubPages相比于传统的博客系统有以下优点：
         ```
         访问GitHub，将blog仓库的master分支设置为GitHubPages，并绑定CNAME为自己的域名。访问```https://uesrname.github.io```测试站点是否生效。
         最后，为域名添加CNAME纪录指向```username.github.io```，即可通过自己的域名访问到GitHubPages，也就是自己的博客了。
-- 更新博客
+- 更新博客内容
     - 新增或修改对应的md文件
     - 使用hugo从新构建网站静态文件
     - push代码到远程仓库即可
