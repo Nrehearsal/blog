@@ -265,8 +265,9 @@ func (ch *Channel) Receive() {
 }
 </code></pre>
 
-<p><em>这里我们没有处理write()系统调用时返回的EAGAIN。由Go运行环境去处理它。这种情况很少发生。也可以像reader那样来处理。</em>
-从ch.send中读取待发送的数据(packet)之后，ch.writer()就可以完成它的操作，最后释放goroutine的栈和用于发送数据的缓存空间。这样我们就可以省掉48GB的内存。</p></li>
+<p><em>这里我们没有处理write()系统调用时返回的EAGAIN。由Go运行环境去处理它。这种情况很少发生。也可以像reader那样来处理。</em></p>
+
+<p>从ch.send中读取待发送的数据(packet)之后，ch.writer()就可以完成它的操作，最后释放goroutine的栈和用于发送数据的缓存空间。这样我们就可以省掉48GB的内存。</p></li>
 
 <li><p><strong>资源控制，使用goroutine池限制处理数据的并发数</strong></p>
 
