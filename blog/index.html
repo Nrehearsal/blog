@@ -56,6 +56,22 @@
 
 
   
+    <h2><a href="https://blog.return0.top/blog/2018/10/mail.ru%E7%99%BE%E4%B8%87%E7%BA%A7%E6%B6%88%E6%81%AF%E6%8E%A8%E9%80%81%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%E4%BC%98%E5%8C%96%E6%80%9D%E8%B7%AF/">MAIL.RU百万级消息推送系统设计优化思路</a></h2>
+    <p class="timestamp">October 22, 2018</p>
+    <div class="content">
+    过早的优化是万恶之源——Donald Knuth
+  MAIL.RU是来自俄罗斯一家互联网公司，主要业务有电子邮件，即时通讯，和网络游戏。其工程师SergeyKamardin在habr论坛上发表了一篇名为A Million WebSockets and Go 的文章，详细的说明了该系统的设计和优化思路。
+简介: MAIL.RU有很多关于用户状态的系统，其中有很多的信息需要推送给用户，他们普遍采用的是通过定期轮询的方式获取这些状态信息，这种方式会导致服务器处理很多无效的请求，从而增加服务器的负载(通常为每秒50000个请求)，为了能让用户更快的接受到这些通知，他们决定从新设计实现一个publisher-subscriber服务，他们称之为Bus模式。用来接送服务状态的变化，并推送给订阅者。
+传统模式与Bus模式的架构对比  传统模式
++-----------+ +-----------+ +-----------+ | | ◄-------+ | | ◄-------+ | | | Storage | | API | HTTP | Browser | | | +-------► | | +-------► | | +-----------+ +-----------+ +-----------+  邮件存储Storage将通知传递给API模块，浏览器通过轮询的方式从API接口获取通知，这导致大部分(60%)的HTTP响应代码304，即没有新的状态变化通知。
+ Bus模式
++-------------+ +---------+ WebSocket +-----------+ | Storage | | API * | +-----------► | Browser | +-------------+ +---------+ (3) +-----------+ + (2) ▲ | | (1) ▼ + +---------------------------------+ | Bus | +---------------------------------+  浏览器与API服务器建立websock连接，API服务将作为Bus的客户端，并将订阅者的信息发送给Bus(告知Bus和Storage监听哪些订阅者的状态变化)，当有新的通知到达时，Storage将通知传递给Bus，Bus再将通知发送给他的订阅者即API，API决定把通知发送给那个一个连接，并通过websocket发送通知。
+    
+      ... <a href="https://blog.return0.top/blog/2018/10/mail.ru%E7%99%BE%E4%B8%87%E7%BA%A7%E6%B6%88%E6%81%AF%E6%8E%A8%E9%80%81%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%E4%BC%98%E5%8C%96%E6%80%9D%E8%B7%AF/">Read more &hellip;</a>
+    
+    </div>
+    
+  
     <h2><a href="https://blog.return0.top/blog/2018/10/%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8hugo%E5%92%8Cgithubpages%E6%90%AD%E5%BB%BA%E5%92%8C%E7%AE%A1%E7%90%86%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/">如何使用Hugo和GithubPages搭建和管理个人博客</a></h2>
     <p class="timestamp">October 14, 2018</p>
     <div class="content">
