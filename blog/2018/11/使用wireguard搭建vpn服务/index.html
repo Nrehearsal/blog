@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>使用wireguard搭建VPN服务 - Nrehearsal</title>
+    <link rel="stylesheet" href="https://blog.return0.top/css/crab.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=3.0">
+    <meta name="generator" content="Hugo 0.49.2" />
+
+
+
+    
+
+  </head>
+  <body>
+
+    <div id="container">
+
+      <div id="header">
+
+        <div id="site-logo">
+          
+            <img src="https://blog.return0.top/img/logo.jpg">
+          
+        </div>
+
+	<div id="site-title"><a href="https://blog.return0.top/">Nrehearsal</a></div>
+	<div id="site-slogan">Life has no rehearsal</div>
+
+      </div>
+
+            <nav>
+	<ul class="first">
+          
+            <li><a href="/">Home</a>
+	    
+	    </li>
+	  
+            <li><a href="/blog/">Blog</a>
+	    
+	    </li>
+	  
+            <li><a href="/contact/">Contact</a>
+	    
+	    </li>
+	  
+	</ul>
+      </nav>
+
+
+      <div id="content">
+
+        <div id="article">
+	  <h1>使用wireguard搭建VPN服务</h1>
+
+
+<p class="timestamp">November 11, 2018</p>
+
+
+
+<div id="summary">
+  <blockquote>
+<p>活了一百年却只能记住30M字节是荒谬的。你知道，这比一张压缩盘还要少。人类境况正在变得日趋退。&ndash;Marvin Minsky</p>
+</blockquote>
+
+</div>
+
+
+<p>使用wireguard搭建VPN服务</p>
+
+<p><a href="https://www.wireguard.com/">wireguard</a>是一款新型的，快速的，安全的VPN软件，将来可能会正式并入linux内核。wireguard搭建十分简单，不需要像strongswan，openvpn那样配置繁琐的认证证书，以及网络接口，总的配置文件也不会超过50行。</p>
+
+<h3 id="安装wireguard">安装wireguard</h3>
+
+<ul>
+<li><pre><code class="language-sh">$ sudo add-apt-repository ppa:wireguard/wireguard
+    
+$ sudo apt-get update
+    
+$ sudo apt-get install wireguard
+</code></pre></li>
+</ul>
+
+<h3 id="生成密钥对">生成密钥对</h3>
+
+<ul>
+<li><pre><code class="language-sh">wg genkey | tee privatekey | wg pubkey &gt; publickey
+</code></pre></li>
+
+<li><p>命令执行完成后，将在当前目录下生成privateKey, publicKey两个文件，分别包含了公钥和私钥</p></li>
+</ul>
+
+<h3 id="开启内核转发">开启内核转发</h3>
+
+<ul>
+<li>编辑/etc/sysctl.conf文件，找到net.ipv4.ip_forward=1，并去掉这一行的注释</li>
+</ul>
+
+<h3 id="配置文件编写">配置文件编写</h3>
+
+<ul>
+<li><p>在/etc/wireguard/目录下，新建文件wg0.conf， 文件名字可以任意取，文件内容如下:</p></li>
+
+<li><pre><code>[Interface] //本端信息
+Address = 192.168.142.1/32  //本端ip
+SaveConfig = true
+PostUp = iptables -A FORWARD -i wg0 -j ACCEPT; iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE; ip6tables -A FORWARD -i wg0 -j ACCEPT; ip6tables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
+PostDown = iptables -D FORWARD -i wg0 -j ACCEPT; iptables -t nat -D POSTROUTING -o eth0 -j MASQUERADE; ip6tables -D FORWARD -i wg0 -j ACCEPT; ip6tables -t nat -D POSTROUTING -o eth0 -j MASQUERADE
+ListenPort = 56632 //监听端口，任意指定即可
+PrivateKey = //服务端的私钥
+
+[Peer]  //对端信息
+PublicKey = //对端的公钥，即客户端的公钥，每个客户端也需要生成一对公私钥。
+AllowedIPs = 192.168.142.2/32 //对端的ip，即客户端的ip。
+</code></pre></li>
+</ul>
+
+<h3 id="启动wireguard服务">启动wireguard服务</h3>
+
+<ul>
+<li><pre><code>wg-quick up wg0    //启动wireguard, wg0为配置文件的名字去掉.conf
+    
+wg-qucik down wg0    //关闭wg0
+</code></pre></li>
+</ul>
+
+<h3 id="客户端配置">客户端配置</h3>
+
+<ul>
+<li><p>在客户端的/etc/wireguard/目录下（Linux和mac平台， windows平台有GUI客户端倒入配置文件即可），也编写wg0.conf，内容如下：</p>
+
+<pre><code>[Interface]
+PrivateKey = //本段的私钥，即客户端的私钥
+Address = 192.168.142.3/24  //客户端的ip
+    
+[Peer]
+PublicKey = //服务端的公钥
+AllowedIPs = 0.0.0.0/0
+Endpoint = 123.123.123.123:56632    //对端，即服务端的ip和端口号
+PersistentKeepalive = 25    //心跳配置
+</code></pre></li>
+
+<li><p>启动客户端</p>
+
+<pre><code>wg-quick up wg0 //启动客户端
+wg-quick down wg0 //关闭客户端
+</code></pre></li>
+</ul>
+
+
+        </div>
+
+      </div>
+
+      <div id="footer">
+        Copyright 2018 @return0.top
+      </div>
+
+    </div>
+
+  </body>
+</html>
+

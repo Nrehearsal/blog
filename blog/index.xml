@@ -6,10 +6,24 @@
     <description>Recent content in Blogs on Nrehearsal</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 05 Nov 2018 00:47:20 +0800</lastBuildDate>
+    <lastBuildDate>Sun, 11 Nov 2018 21:28:20 +0800</lastBuildDate>
     
 	<atom:link href="https://blog.return0.top/blog/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>使用wireguard搭建VPN服务</title>
+      <link>https://blog.return0.top/blog/2018/11/%E4%BD%BF%E7%94%A8wireguard%E6%90%AD%E5%BB%BAvpn%E6%9C%8D%E5%8A%A1/</link>
+      <pubDate>Sun, 11 Nov 2018 21:28:20 +0800</pubDate>
+      
+      <guid>https://blog.return0.top/blog/2018/11/%E4%BD%BF%E7%94%A8wireguard%E6%90%AD%E5%BB%BAvpn%E6%9C%8D%E5%8A%A1/</guid>
+      <description>活了一百年却只能记住30M字节是荒谬的。你知道，这比一张压缩盘还要少。人类境况正在变得日趋退。&amp;ndash;Marvin Minsky
+  使用wireguard搭建VPN服务
+wireguard是一款新型的，快速的，安全的VPN软件，将来可能会正式并入linux内核。wireguard搭建十分简单，不需要像strongswan，openvpn那样配置繁琐的认证证书，以及网络接口，总的配置文件也不会超过50行。
+安装wireguard  $ sudo add-apt-repository ppa:wireguard/wireguard $ sudo apt-get update $ sudo apt-get install wireguard   生成密钥对  wg genkey | tee privatekey | wg pubkey &amp;gt; publickey  命令执行完成后，将在当前目录下生成privateKey, publicKey两个文件，分别包含了公钥和私钥
+  开启内核转发  编辑/etc/sysctl.conf文件，找到net.ipv4.ip_forward=1，并去掉这一行的注释  配置文件编写  在/etc/wireguard/目录下，新建文件wg0.conf， 文件名字可以任意取，文件内容如下:
+ [Interface] //本端信息 Address = 192.168.142.1/32 //本端ip SaveConfig = true PostUp = iptables -A FORWARD -i wg0 -j ACCEPT; iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE; ip6tables -A FORWARD -i wg0 -j ACCEPT; ip6tables -t nat -A POSTROUTING -o eth0 -j MASQUERADE PostDown = iptables -D FORWARD -i wg0 -j ACCEPT; iptables -t nat -D POSTROUTING -o eth0 -j MASQUERADE; ip6tables -D FORWARD -i wg0 -j ACCEPT; ip6tables -t nat -D POSTROUTING -o eth0 -j MASQUERADE ListenPort = 56632 //监听端口，任意指定即可 PrivateKey = //服务端的私钥 [Peer] //对端信息 PublicKey = //对端的公钥，即客户端的公钥，每个客户端也需要生成一对公私钥。 AllowedIPs = 192.</description>
+    </item>
     
     <item>
       <title>使用kubeadmin搭建kubernetes集群(一)</title>

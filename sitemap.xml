@@ -3,6 +3,11 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://blog.return0.top/blog/2018/11/%E4%BD%BF%E7%94%A8wireguard%E6%90%AD%E5%BB%BAvpn%E6%9C%8D%E5%8A%A1/</loc>
+    <lastmod>2018-11-11T21:28:20+08:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://blog.return0.top/blog/2018/11/%E4%BD%BF%E7%94%A8kubeadmin%E6%90%AD%E5%BB%BAkubernetes%E9%9B%86%E7%BE%A4%E4%B8%80/</loc>
     <lastmod>2018-11-05T00:47:20+08:00</lastmod>
   </url>
@@ -34,13 +39,13 @@
   
   <url>
     <loc>https://blog.return0.top/blog/</loc>
-    <lastmod>2018-11-05T00:47:20+08:00</lastmod>
+    <lastmod>2018-11-11T21:28:20+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://blog.return0.top/</loc>
-    <lastmod>2018-11-05T00:47:20+08:00</lastmod>
+    <lastmod>2018-11-11T21:28:20+08:00</lastmod>
     <priority>0</priority>
   </url>
   
