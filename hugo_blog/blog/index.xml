@@ -1,15 +1,29 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Nrehearsal</title>
-    <link>https://blog.return0.top/</link>
-    <description>Recent content on Nrehearsal</description>
+    <title>Blogs on Nrehearsal</title>
+    <link>https://blog.return0.top/blog/</link>
+    <description>Recent content in Blogs on Nrehearsal</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 05 Nov 2018 00:47:20 +0800</lastBuildDate>
+    <lastBuildDate>Sun, 11 Nov 2018 21:28:20 +0800</lastBuildDate>
     
-	<atom:link href="https://blog.return0.top/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://blog.return0.top/blog/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>使用wireguard搭建VPN服务</title>
+      <link>https://blog.return0.top/blog/2018/11/%E4%BD%BF%E7%94%A8wireguard%E6%90%AD%E5%BB%BAvpn%E6%9C%8D%E5%8A%A1/</link>
+      <pubDate>Sun, 11 Nov 2018 21:28:20 +0800</pubDate>
+      
+      <guid>https://blog.return0.top/blog/2018/11/%E4%BD%BF%E7%94%A8wireguard%E6%90%AD%E5%BB%BAvpn%E6%9C%8D%E5%8A%A1/</guid>
+      <description>活了一百年却只能记住30M字节是荒谬的。你知道，这比一张压缩盘还要少。人类境况正在变得日趋退。&amp;ndash;Marvin Minsky
+  使用wireguard搭建VPN服务
+wireguard是一款新型的，快速的，安全的VPN软件，将来可能会正式并入linux内核。wireguard搭建十分简单，不需要像strongswan，openvpn那样配置繁琐的认证证书，以及网络接口，总的配置文件也不会超过50行。
+安装wireguard  $ sudo add-apt-repository ppa:wireguard/wireguard $ sudo apt-get update $ sudo apt-get install wireguard   生成密钥对  wg genkey | tee privatekey | wg pubkey &amp;gt; publickey  命令执行完成后，将在当前目录下生成privateKey, publicKey两个文件，分别包含了公钥和私钥
+  开启内核转发  编辑/etc/sysctl.conf文件，找到net.ipv4.ip_forward=1，并去掉这一行的注释  配置文件编写  在/etc/wireguard/目录下，新建文件wg0.conf， 文件名字可以任意取，文件内容如下:
+ [Interface] //本端信息 Address = 192.168.142.1/32 //本端ip SaveConfig = true PostUp = iptables -A FORWARD -i wg0 -j ACCEPT; iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE; ip6tables -A FORWARD -i wg0 -j ACCEPT; ip6tables -t nat -A POSTROUTING -o eth0 -j MASQUERADE PostDown = iptables -D FORWARD -i wg0 -j ACCEPT; iptables -t nat -D POSTROUTING -o eth0 -j MASQUERADE; ip6tables -D FORWARD -i wg0 -j ACCEPT; ip6tables -t nat -D POSTROUTING -o eth0 -j MASQUERADE ListenPort = 56632 //监听端口，任意指定即可 PrivateKey = //服务端的私钥 [Peer] //对端信息 PublicKey = //对端的公钥，即客户端的公钥，每个客户端也需要生成一对公私钥。 AllowedIPs = 192.</description>
+    </item>
     
     <item>
       <title>使用kubeadmin搭建kubernetes集群(一)</title>
@@ -81,34 +95,6 @@ Hugo+GithubPages的方案相比于传统的博客系统有以下优点：
  安装golang，并配置$GOPATH 编译安装hugo
 $ git clone https://github.com/gohugoio/hugo.git $ cd hugo $ go install $ which hugo //验证安装    如何使用Hugo:  创建博客模板
 $ hugo new site blog //创建一个新站点 $ cd blog $ tree blog #blog #├── archetypes #│ └── default.</description>
-    </item>
-    
-    <item>
-      <title>Contact</title>
-      <link>https://blog.return0.top/contact/</link>
-      <pubDate>Sat, 18 Mar 2017 10:59:56 +0100</pubDate>
-      
-      <guid>https://blog.return0.top/contact/</guid>
-      <description>你可以通过如下方式联系我:
- Eamil: myself@return0.top
-Github: Nrehearsal
- 有任何问题都可以给我发邮件，希望我的博客能够帮助到你。
-感谢来访！
- 部分素材来自网络，如有侵权，请联系删除。</description>
-    </item>
-    
-    <item>
-      <title>Home</title>
-      <link>https://blog.return0.top/home/</link>
-      <pubDate>Sun, 05 Feb 2017 07:51:49 +0100</pubDate>
-      
-      <guid>https://blog.return0.top/home/</guid>
-      <description> 最近读到的书:&amp;nbsp; 我们趋行在人生这个亘古的旅途，在坎坷中奔跑，在挫折里涅槃，忧愁缠满全身， 痛苦飘洒一地。我们累，却无从止歇；我们苦，却无法回避——加西亚·马尔克斯《百年孤独》
-  我是一个二十出头的程序员
-我的研究方向:
- LinuxC程序开发 Golang开发 网络编程 DevOps  关于Nrehearsal:
- 生命没有彩排，因为时光只会放映一次。 我也不知道这些年来是否演绎了最完美的自己，可是时代的车轮总是滚滚向前， 我也只能马不停歇地奔跑，才能有看见光明的机会，否则我就只能被车轮卷起的尘埃包围。 其实生命中真正重要的不是你遭遇了什么，而是你记住了哪些事，又是如何铭记的。
- </description>
     </item>
     
   </channel>

@@ -56,6 +56,21 @@
 
 
   
+    <h2><a href="https://blog.return0.top/blog/2018/11/%E4%BD%BF%E7%94%A8wireguard%E6%90%AD%E5%BB%BAvpn%E6%9C%8D%E5%8A%A1/">使用wireguard搭建VPN服务</a></h2>
+    <p class="timestamp">November 11, 2018</p>
+    <div class="content">
+    活了一百年却只能记住30M字节是荒谬的。你知道，这比一张压缩盘还要少。人类境况正在变得日趋退。&ndash;Marvin Minsky
+  使用wireguard搭建VPN服务
+wireguard是一款新型的，快速的，安全的VPN软件，将来可能会正式并入linux内核。wireguard搭建十分简单，不需要像strongswan，openvpn那样配置繁琐的认证证书，以及网络接口，总的配置文件也不会超过50行。
+安装wireguard  $ sudo add-apt-repository ppa:wireguard/wireguard $ sudo apt-get update $ sudo apt-get install wireguard   生成密钥对  wg genkey | tee privatekey | wg pubkey &gt; publickey  命令执行完成后，将在当前目录下生成privateKey, publicKey两个文件，分别包含了公钥和私钥
+  开启内核转发  编辑/etc/sysctl.conf文件，找到net.ipv4.ip_forward=1，并去掉这一行的注释  配置文件编写  在/etc/wireguard/目录下，新建文件wg0.conf， 文件名字可以任意取，文件内容如下:
+ [Interface] //本端信息 Address = 192.168.142.1/32 //本端ip SaveConfig = true PostUp = iptables -A FORWARD -i wg0 -j ACCEPT; iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE; ip6tables -A FORWARD -i wg0 -j ACCEPT; ip6tables -t nat -A POSTROUTING -o eth0 -j MASQUERADE PostDown = iptables -D FORWARD -i wg0 -j ACCEPT; iptables -t nat -D POSTROUTING -o eth0 -j MASQUERADE; ip6tables -D FORWARD -i wg0 -j ACCEPT; ip6tables -t nat -D POSTROUTING -o eth0 -j MASQUERADE ListenPort = 56632 //监听端口，任意指定即可 PrivateKey = //服务端的私钥 [Peer] //对端信息 PublicKey = //对端的公钥，即客户端的公钥，每个客户端也需要生成一对公私钥。 AllowedIPs = 192.
+    
+      ... <a href="https://blog.return0.top/blog/2018/11/%E4%BD%BF%E7%94%A8wireguard%E6%90%AD%E5%BB%BAvpn%E6%9C%8D%E5%8A%A1/">Read more &hellip;</a>
+    
+    </div>
+    
+  
     <h2><a href="https://blog.return0.top/blog/2018/11/%E4%BD%BF%E7%94%A8kubeadmin%E6%90%AD%E5%BB%BAkubernetes%E9%9B%86%E7%BE%A4%E4%B8%80/">使用kubeadmin搭建kubernetes集群(一)</a></h2>
     <p class="timestamp">November 5, 2018</p>
     <div class="content">

@@ -6,30 +6,81 @@
     <description>Recent content in Blogs on Nrehearsal</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 27 Mar 2017 21:30:00 +0100</lastBuildDate>
+    <lastBuildDate>Mon, 05 Nov 2018 00:47:20 +0800</lastBuildDate>
     
 	<atom:link href="https://blog.return0.top/blog/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>Welcome to my blog</title>
-      <link>https://blog.return0.top/blog/2017/03/welcome-to-my-blog/</link>
-      <pubDate>Mon, 27 Mar 2017 21:30:00 +0100</pubDate>
+      <title>使用kubeadmin搭建kubernetes集群(一)</title>
+      <link>https://blog.return0.top/blog/2018/11/%E4%BD%BF%E7%94%A8kubeadmin%E6%90%AD%E5%BB%BAkubernetes%E9%9B%86%E7%BE%A4%E4%B8%80/</link>
+      <pubDate>Mon, 05 Nov 2018 00:47:20 +0800</pubDate>
       
-      <guid>https://blog.return0.top/blog/2017/03/welcome-to-my-blog/</guid>
-      <description>This page is intended to give you a feeling of what a blog post looks like. Crab supports both fixed (static) pages as well as blog posts.
-In order to make blog pages work correctly, you need proper permalinks settings in your site&amp;rsquo;s config.toml.
-Hugo will then treat all files in the blog directory (for example) like blog posts.
-Have a look at the config.toml provided with this example site, as well as the page about Permalinks from the Hugo docs.</description>
+      <guid>https://blog.return0.top/blog/2018/11/%E4%BD%BF%E7%94%A8kubeadmin%E6%90%AD%E5%BB%BAkubernetes%E9%9B%86%E7%BE%A4%E4%B8%80/</guid>
+      <description>没有一个人的记性，好到可以作个成功的说谎者——林肯
+  想在vps上搭建一个kubernetes单节点Demo，遇到很多问题，仍未搭建完成。如果仅是用来测试的话，建议使用minikube+virtualBox安装。
+使用kubeadmin搭建kubernetes集群(一)
+ 安装环境 · Ubuntu16.04 · 2GB RAM . 能够访问google的网络环境(非常重要)
+master节点占用的端口:
+   协议 流向 端口号 用途 占用组件     TCP 入站 6443 kubernetes API server all   TCP 入站 2379-2380 etcd server client API kube-apiserver, etcd   TCP 入站 10250 Kubelet API Self, Control plane   TCP 入站 10251 kube-scheduler self    worker节点占用的端口:
+   协议 流向 端口号 用途 占用组件     TCP 入站 10250 Kubelet API Self, Control plane   TCP 入站 30000-32767 NodePort Services** All    安装docker .</description>
     </item>
     
     <item>
-      <title>More blogging</title>
-      <link>https://blog.return0.top/blog/2017/02/more-blogging/</link>
-      <pubDate>Mon, 27 Feb 2017 21:30:00 +0100</pubDate>
+      <title>三种主流的云服务模式以及应用部署模式的变迁</title>
+      <link>https://blog.return0.top/blog/2018/11/%E4%B8%89%E7%A7%8D%E4%B8%BB%E6%B5%81%E7%9A%84%E4%BA%91%E6%9C%8D%E5%8A%A1%E6%A8%A1%E5%BC%8F%E4%BB%A5%E5%8F%8A%E5%BA%94%E7%94%A8%E9%83%A8%E7%BD%B2%E6%A8%A1%E5%BC%8F%E7%9A%84%E5%8F%98%E8%BF%81/</link>
+      <pubDate>Mon, 05 Nov 2018 00:47:06 +0800</pubDate>
       
-      <guid>https://blog.return0.top/blog/2017/02/more-blogging/</guid>
-      <description>This is yet another blog post to demonstrate the blog feature. It&amp;rsquo;s from a different month than other posts, to show you how the archive feature works.</description>
+      <guid>https://blog.return0.top/blog/2018/11/%E4%B8%89%E7%A7%8D%E4%B8%BB%E6%B5%81%E7%9A%84%E4%BA%91%E6%9C%8D%E5%8A%A1%E6%A8%A1%E5%BC%8F%E4%BB%A5%E5%8F%8A%E5%BA%94%E7%94%A8%E9%83%A8%E7%BD%B2%E6%A8%A1%E5%BC%8F%E7%9A%84%E5%8F%98%E8%BF%81/</guid>
+      <description>一个人知道自己为什么而活，就可以忍受任何一种生活。——尼采
+  得益于虚拟化和分布式技术的发展，使得人们有能力将计算机硬件资源虚拟成软件或者服务的形式，从而提供给用户使用，并做到统一的编排管理，不但提高了计算资源的整体利用率，更极大的降低了企业的资本性成本和人力成本，随着云计算技术的应用和发展，云服务的服务模式也有了一些定义。
+IaaS, PaaS, SaaS三大云服务模式
+ IaaS(Infrastructure-as-a-Service): 基础设施及服务：主要体现在弹性和虚拟化方面，纯粹的将硬件资源抽象成服务，提供给用户CPU，内存，硬盘，网络等硬件资源，用户需要在其之上构建自己的服务场景，并且可以根据业务运行状况进行拓展或收缩。
+ PaaS(Platform-as-a-Service): 平台即服务：核心是计算平台和解决方案堆。计算平台并不是指软件本身，而是指构建并运行软件的平台；解决方案堆由应用程序组成，这些应用程序有助于开发过程和应用程序部署，这些应用程序是指操作系统、运行时环境、源代码控制存储库和必需的所有其他中间件；PaaS主要的服务对象是程序开发者，提供用户使用一种程序的运行环境，比如说php，java，或者.net。从而减少开发人与维护运行环境的成本。
+ SaaS(Software-as-a-Service): 软件即服务：为软件提供基于网络的访问。SaaS为用户提供了一种降低软件使用成本的方法，按需求使用软件而不是购买完整的软件生命周期。提高了用户付费的体验，同时减少了用户寻求技术支持的频率(部署发布敏捷，bug可被迅速修复)，降低了开发者的适配成本。
+  应用部署模式的变迁
+ 物理单机(IBM,SUN ~2000): 在商用服务计算领域几乎都是以单机作为基础计算单元对计算资源进行管理和协调控制，新部署程序往往需要购买一台新的物理机器。程序直接在物理机上构建，部署，运行。
+ 虚拟化(AWS,GCE,Azure,Aliyun 2001~2009): VMware最先发布了针对服务器市场的虚拟化技术解决方案，提高了资源的利用率，降低了使用成本。而后VMware，Xen，KVM三足鼎立，拉开了虚拟化云计算的大幕。基础计算单元变成了VM，服务的构建，部署，运行逐步迁移到VM上。
+ 虚拟化：成熟期(OpenStack 2010~now) 部署形式：公有云，私有云，混合云。 服务模式：Iaas，PaaS，SaaS。
+ 容器化(Docker 2013~now) Docker将已有技术整合包装，统一标准。 与VM相比，容器具有开发交付流程操作对象同步，执行效率更高，资源占用更少等优势。 计算单元从VM变成容器。
+ 云原生(kubernetes 2015~now) 以容器为基础，借助容器自动化管理平台进行动态编排和资源优化利用。
+  参考资料: IBM开发者developerworks云计算服务模式</description>
+    </item>
+    
+    <item>
+      <title>MAIL.RU百万级消息推送系统设计优化思路</title>
+      <link>https://blog.return0.top/blog/2018/10/mail.ru%E7%99%BE%E4%B8%87%E7%BA%A7%E6%B6%88%E6%81%AF%E6%8E%A8%E9%80%81%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%E4%BC%98%E5%8C%96%E6%80%9D%E8%B7%AF/</link>
+      <pubDate>Mon, 22 Oct 2018 01:43:49 +0800</pubDate>
+      
+      <guid>https://blog.return0.top/blog/2018/10/mail.ru%E7%99%BE%E4%B8%87%E7%BA%A7%E6%B6%88%E6%81%AF%E6%8E%A8%E9%80%81%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%E4%BC%98%E5%8C%96%E6%80%9D%E8%B7%AF/</guid>
+      <description>过早的优化是万恶之源——Donald Knuth
+  MAIL.RU是来自俄罗斯一家互联网公司，主要业务有电子邮件，即时通讯，和网络游戏。其工程师SergeyKamardin在habr论坛上发表了一篇名为A Million WebSockets and Go 的文章，详细的说明了该系统的设计和优化思路。
+简介: MAIL.RU有很多关于用户状态的系统，其中有很多的信息需要推送给用户，他们普遍采用的是通过定期轮询的方式获取这些状态信息，这种方式会导致服务器处理很多无效的请求，从而增加服务器的负载(通常为每秒50000个请求)，为了能让用户更快的接受到这些通知，他们决定从新设计实现一个publisher-subscriber服务，他们称之为Bus模式。用来接送服务状态的变化，并推送给订阅者。
+传统模式与Bus模式的架构对比  传统模式
++-----------+ +-----------+ +-----------+ | | ◄-------+ | | ◄-------+ | | | Storage | | API | HTTP | Browser | | | +-------► | | +-------► | | +-----------+ +-----------+ +-----------+  邮件存储Storage将通知传递给API模块，浏览器通过轮询的方式从API接口获取通知，这导致大部分(60%)的HTTP响应代码304，即没有新的状态变化通知。
+ Bus模式
++-------------+ +---------+ WebSocket +-----------+ | Storage | | API * | +-----------► | Browser | +-------------+ +---------+ (3) +-----------+ + (2) ▲ | | (1) ▼ + +---------------------------------+ | Bus | +---------------------------------+  浏览器与API服务器建立websock连接，API服务将作为Bus的客户端，并将订阅者的信息发送给Bus(告知Bus和Storage监听哪些订阅者的状态变化)，当有新的通知到达时，Storage将通知传递给Bus，Bus再将通知发送给他的订阅者即API，API决定把通知发送给那个一个连接，并通过websocket发送通知。</description>
+    </item>
+    
+    <item>
+      <title>如何使用Hugo和GithubPages搭建和管理个人博客</title>
+      <link>https://blog.return0.top/blog/2018/10/%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8hugo%E5%92%8Cgithubpages%E6%90%AD%E5%BB%BA%E5%92%8C%E7%AE%A1%E7%90%86%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/</link>
+      <pubDate>Sun, 14 Oct 2018 15:49:58 +0800</pubDate>
+      
+      <guid>https://blog.return0.top/blog/2018/10/%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8hugo%E5%92%8Cgithubpages%E6%90%AD%E5%BB%BA%E5%92%8C%E7%AE%A1%E7%90%86%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/</guid>
+      <description>死会引人哭泣。虽则如此，人生的三分之一却在睡眠中打发掉了。——拜伦
+  Hugo是由Go语言实现的静态网站生成。 具有简单、易用、高效、易扩展、快速部署等优点。可将markdown格式的文本结合自定义的主题生成静态的html。
+GithubPages是一个静态站点托管服务，旨在直接从GitHub存储库托管您的个人，组织或项目页面。
+Hugo+GithubPages的方案相比于传统的博客系统有以下优点：
+ 低成本:&amp;nbsp; 无需单独购买VSP服务器或者域名空间，并且不限流量。
+ 高度定制化：可以方便的定义网站功能模块，增加个性化功能。
+ 方便管理:&amp;nbsp; 由于不需要使用数据库，所有数据均以md形式保存，可直接使用git 行管理，对于博客系统尤其适用。
+ 更专业:&amp;nbsp; 对于开源项目的文档，可以使用git与项目版本同步。
+  
+安装Hugo:  使用yum, apt-get, brew安装 通过源码安装
+ 安装golang，并配置$GOPATH 编译安装hugo
+$ git clone https://github.com/gohugoio/hugo.git $ cd hugo $ go install $ which hugo //验证安装    如何使用Hugo:  创建博客模板
+$ hugo new site blog //创建一个新站点 $ cd blog $ tree blog #blog #├── archetypes #│ └── default.</description>
     </item>
     
   </channel>

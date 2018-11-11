@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>如何使用Hugo和GithubPages搭建和管理个人博客 - Nrehearsal</title>
+    <link rel="stylesheet" href="https://blog.return0.top/css/crab.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=3.0">
+    <meta name="generator" content="Hugo 0.49.2" />
+
+
+
+    
+
+  </head>
+  <body>
+
+    <div id="container">
+
+      <div id="header">
+
+        <div id="site-logo">
+          
+            <img src="https://blog.return0.top/img/logo.jpg">
+          
+        </div>
+
+	<div id="site-title"><a href="https://blog.return0.top/">Nrehearsal</a></div>
+	<div id="site-slogan">Life has no rehearsal</div>
+
+      </div>
+
+            <nav>
+	<ul class="first">
+          
+            <li><a href="/">Home</a>
+	    
+	    </li>
+	  
+            <li><a href="/blog/">Blog</a>
+	    
+	    </li>
+	  
+            <li><a href="/contact/">Contact</a>
+	    
+	    </li>
+	  
+	</ul>
+      </nav>
+
+
+      <div id="content">
+
+        <div id="article">
+	  <h1>如何使用Hugo和GithubPages搭建和管理个人博客</h1>
+
+
+<p class="timestamp">October 14, 2018</p>
+
+
+
+<div id="summary">
+  <blockquote>
+<p>死会引人哭泣。虽则如此，人生的三分之一却在睡眠中打发掉了。——拜伦</p>
+</blockquote>
+
+</div>
+
+
+<p><br/><a href="https://github.com/gohugoio/hugo"><strong>Hugo</strong></a>是由Go语言实现的静态网站生成。
+具有简单、易用、高效、易扩展、快速部署等优点。可将markdown格式的文本结合自定义的主题生成静态的html。</p>
+
+<p><a href="https://help.github.com/articles/what-is-github-pages/"><strong>GithubPages</strong></a>是一个静态站点托管服务，旨在直接从GitHub存储库托管您的个人，组织或项目页面。</p>
+
+<p>Hugo+GithubPages的方案相比于传统的博客系统有以下优点：</p>
+
+<ul>
+<li><p>低成本:&nbsp; 无需单独购买VSP服务器或者域名空间，并且不限流量。</p></li>
+
+<li><p>高度定制化：可以方便的定义网站功能模块，增加个性化功能。</p></li>
+
+<li><p>方便管理:&nbsp; 由于不需要使用数据库，所有数据均以md形式保存，可直接使用git
+行管理，对于博客系统尤其适用。</p></li>
+
+<li><p>更专业:&nbsp; 对于开源项目的文档，可以使用git与项目版本同步。</p></li>
+</ul>
+
+<p><br/></p>
+
+<h3 id="安装hugo"><strong>安装Hugo</strong>:</h3>
+
+<ul>
+<li>使用yum, apt-get, brew安装</li>
+
+<li><p>通过源码安装</p>
+
+<ul>
+<li>安装golang，并配置$GOPATH</li>
+
+<li><p>编译安装hugo</p>
+
+<pre><code class="language-sh">$ git clone https://github.com/gohugoio/hugo.git 
+$ cd hugo
+$ go install
+$ which hugo //验证安装
+</code></pre></li>
+</ul></li>
+</ul>
+
+<h3 id="如何使用hugo"><strong>如何使用Hugo</strong>:</h3>
+
+<ul>
+<li><p>创建博客模板</p>
+
+<pre><code class="language-sh">    $ hugo new site blog    //创建一个新站点
+    $ cd blog
+        
+    $ tree blog
+    #blog
+    #├── archetypes
+    #│   └── default.md
+    #├── config.toml  //配置文件，可用于配置，网站主题，CopyRight，标题，站点结构等信息
+    #├── content    //网站结构目录，更具sitemap生成，对应每个页面的md文件
+    #├── data
+    #├── layouts
+    #├── static
+    #└── themes    //主题目录，可从下文中的网站下载hugo主题
+</code></pre></li>
+
+<li><p>网站主题</p>
+
+<ul>
+<li><a href="https://themes.gohugo.io/">挑选喜欢的主题</a></li>
+
+<li><p>安装主题(以crab主题为例)</p>
+
+<pre><code class="language-sh">$ cd blog/themes
+$ git clone https://github.com/thomasheller/crab.git
+$ cd crab
+$ ls 
+# archetypes  exampleSite  images  layouts  LICENSE.md  README.md  static  theme.toml  //exampleSite中包含了一个Demo站点
+        
+$ cp exampleSite/config.toml ../blog/   //将Demo网站的配置文件拷贝到blog/目录下
+$ cp -r exampleSite/content/* ../blog/content/  //将Demo网站的站点md文件拷贝到blog/content/下
+</code></pre></li>
+</ul></li>
+
+<li><p>运行Demo网站</p>
+
+<pre><code class="language-sh">$ cd blog/
+$ hugo serve -w
+</code></pre>
+
+<p>访问<code>http://localhost:1313/</code>， 即可查看的Demo网站</p></li>
+
+<li><p>构建自己的网站</p>
+
+<ul>
+<li>根据主题帮助文档修改config.toml内容为自己网站的相关信息</li>
+
+<li><p>根据content结构创建对应的md文件，例如:</p>
+
+<pre><code class="language-sh">$ cd blog/
+$ hugo new blog/first_blog.md
+</code></pre></li>
+
+<li><p>编辑first_blog.md，添加自定义内容，并执行<code>hugo serve -w</code>，即可在浏览器查看到新增的博客文章</p></li>
+</ul></li>
+</ul>
+
+<h3 id="部署到githubpages"><strong>部署到GitHubPages</strong>:</h3>
+
+<ul>
+<li>创建一个公开的仓库blog</li>
+
+<li><p>本地构建站点配置，以及静态html文件</p>
+
+<ul>
+<li><p>构建站点</p>
+
+<pre><code class="language-sh">$ mkdir blog
+$ cd blog
+$ hugo new site hugo_blog
+        
+$tree blog
+#blog
+#└── hugo_blog 
+#blog文件夹内包含hugo_blog文件夹，hugo_blog存放配置以及md文件
+#blog文件夹存在，hugo自动生成的静态文件
+        
+$ cd hugo_blog
+#配置站点，添加体定义内容md文件
+</code></pre></li>
+
+<li><p>测试站点是否正常，并构建静态文件</p>
+
+<pre><code class="language-sh">$ cd hugo_blog
+$ hugo serve -w //测试站点是否配置正确，自定义内容是否添加成功
+$ hugo -d ../   //上级目录为blog
+</code></pre></li>
+
+<li><p>push代码到仓库</p>
+
+<pre><code class="language-sh">$ cd blo
+$ git init
+$ git add .
+$ git commit -m&quot;first commit&quot;
+$ gti remote add origin git@github.com:username/blog.git
+$ git push origin master
+</code></pre>
+
+<p>访问GitHub，将blog仓库的master分支设置为GitHubPages，并绑定CNAME为自己的域名。访问<code>https://uesrname.github.io</code>测试站点是否生效。
+最后，为域名添加CNAME纪录指向<code>username.github.io</code>，即可通过自己的域名访问到GitHubPages，也就是自己的博客了。</p></li>
+</ul></li>
+
+<li><p>更新博客内容</p>
+
+<ul>
+<li>新增或修改对应的md文件</li>
+<li>使用hugo从新构建网站静态文件</li>
+<li>push代码到远程仓库即可</li>
+</ul></li>
+</ul>
+
+
+        </div>
+
+      </div>
+
+      <div id="footer">
+        Copyright 2018 @return0.top
+      </div>
+
+    </div>
+
+  </body>
+</html>
+
