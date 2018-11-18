@@ -17,7 +17,7 @@
       <pubDate>Sun, 18 Nov 2018 19:08:23 +0800</pubDate>
       
       <guid>https://blog.return0.top/blog/2018/11/nginx%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%B9%8B%E7%AE%80%E4%BB%8B%E4%B8%8E%E7%BC%96%E8%AF%91%E6%8C%87%E5%8D%97/</guid>
-      <description>身为一个中国人，最大的痛苦时忍受别人“推己及人”的次数，比世界上任何地方的人都要多。&amp;ndash;王小波
+      <description>身为一个中国人，最大的痛苦是忍受别人“推己及人”的次数，比世界上任何地方的人都要多。&amp;ndash;王小波
   nginx主要应用场景 nginx一般作为网络的边缘节点，主要有以下三个应用场景   静态资源服务器
 使用nginx提供本地文件的网络访问服务
  反向代理服务器
