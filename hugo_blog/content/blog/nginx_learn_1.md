@@ -152,7 +152,7 @@ draft: false
     $ make install
     ```
     
-    会将相关文件拷贝到prefix执行的目录中:
+    会将相关文件拷贝到prefix指定的目录中:
     ```
     total 16K
     drwxrwxr-x 2 ubuntu ubuntu 4.0K Nov 18 19:01 conf
