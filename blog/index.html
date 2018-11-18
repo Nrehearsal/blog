@@ -56,6 +56,35 @@
 
 
   
+    <h2><a href="https://blog.return0.top/blog/2018/11/nginx%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%B9%8B%E7%AE%80%E4%BB%8B%E4%B8%8E%E7%BC%96%E8%AF%91%E6%8C%87%E5%8D%97/">Nginx学习笔记之简介与编译指南</a></h2>
+    <p class="timestamp">November 18, 2018</p>
+    <div class="content">
+    身为一个中国人，最大的痛苦时忍受别人“推己及人”的次数，比世界上任何地方的人都要多。&ndash;王小波
+  nginx主要应用场景 nginx一般作为网络的边缘节点，主要有以下三个应用场景   静态资源服务器
+使用nginx提供本地文件的网络访问服务
+ 反向代理服务器
+缓存：缓存上游服务的不常改变的内容，直接由nginx提供，减少用户访问时延。
+负载均衡服务器：方便动态扩容，和容灾，提高服务的可用和可靠性。
+ 高性能API服务器：当应用服务的性能达到瓶颈，可使用nginx和nginx支持动态语言(如JavaScript，Lua)，由nginx直接访问缓存服务和数据库服务，直接提供API功能，或者作为web防火墙，如OpenResty等。
+  nginx的四个主要的组成部分  nginx二进制可执行文件：nginx与其模块编译生成的文件
+ nginx.conf配置文件：控制nginx的行为
+ access.log访问日志：记录每一条http请求信息
+ error.log错误日志：定位错误发生位置
+  版本选择  官方开源版本：推荐使用的版本，源代码开放，可根据业务需求灵活配置。
+ 官方商业版本：在整合第三方模块，运营监控，技术支持上有很多优点，缺点就是不开源。
+ Tengine：阿里巴巴出品，虽然很多特性领先于官方版本，但无法与nginx同步升级，如无特定需求，不推荐使用。
+ OpenResty开源版：使用lua语言开发第三方模块，兼具高性能和高开发效率。
+ OpenResty商业版：OpenResty的商业版本，开箱即用。
+  编译指南 为了方便添加第三方模块，编译安装的方式比从直接软件仓库安装更常用。
+ 源代码下载：从nginx.org下载nginx源代码
+ 源代码目录结构
+total 764 drwxr-xr-x 8 ubuntu ubuntu 4096 Nov 6 21:52 ./ drwxrwxr-x 3 ubuntu ubuntu 4096 Nov 18 18:13 ../ drwxr-xr-x 6 ubuntu ubuntu 4096 Nov 18 18:13 auto/ -rw-r--r-- 1 ubuntu ubuntu 287441 Nov 6 21:52 CHANGES -rw-r--r-- 1 ubuntu ubuntu 438114 Nov 6 21:52 CHANGES.
+    
+      ... <a href="https://blog.return0.top/blog/2018/11/nginx%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%B9%8B%E7%AE%80%E4%BB%8B%E4%B8%8E%E7%BC%96%E8%AF%91%E6%8C%87%E5%8D%97/">Read more &hellip;</a>
+    
+    </div>
+    
+  
     <h2><a href="https://blog.return0.top/blog/2018/11/%E4%BD%BF%E7%94%A8wireguard%E6%90%AD%E5%BB%BAvpn%E6%9C%8D%E5%8A%A1/">使用wireguard搭建VPN服务</a></h2>
     <p class="timestamp">November 11, 2018</p>
     <div class="content">
