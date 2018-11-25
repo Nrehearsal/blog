@@ -6,10 +6,29 @@
     <description>Recent content on Nrehearsal</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 18 Nov 2018 19:08:23 +0800</lastBuildDate>
+    <lastBuildDate>Sun, 25 Nov 2018 18:33:14 +0800</lastBuildDate>
     
 	<atom:link href="https://blog.return0.top/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>使用unbound搭建DNS服务器，配置缓存以及防止DNS污染</title>
+      <link>https://blog.return0.top/blog/2018/11/%E4%BD%BF%E7%94%A8unbound%E6%90%AD%E5%BB%BAdns%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%85%8D%E7%BD%AE%E7%BC%93%E5%AD%98%E4%BB%A5%E5%8F%8A%E9%98%B2%E6%AD%A2dns%E6%B1%A1%E6%9F%93/</link>
+      <pubDate>Sun, 25 Nov 2018 18:33:14 +0800</pubDate>
+      
+      <guid>https://blog.return0.top/blog/2018/11/%E4%BD%BF%E7%94%A8unbound%E6%90%AD%E5%BB%BAdns%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%85%8D%E7%BD%AE%E7%BC%93%E5%AD%98%E4%BB%A5%E5%8F%8A%E9%98%B2%E6%AD%A2dns%E6%B1%A1%E6%9F%93/</guid>
+      <description>真理是时间之产物，而不是权威之产物 ——弗兰西斯·培根
+  使用unbound搭建DNS服务器，配置缓存以及防止DNS污染
+Unbound is a validating, recursive, caching DNS resolver. It is designed to be fast and lean and incorporates modern features based on open standards.
+搭建环境  ubuntu_server16.04
+ 1Core, 1G
+ 能够通过代理访问国外DNS服务器(8.8.8.8，1.1.1.1等)，因为如果直接通过国内路线访问上述DNS，某些域名会得到错误的ip地址。
+  安装unbound  源码安装：下载unbound，更具官方教程安装
+ 仓库安装:
+$ sudo apt-get update $ sudo apt-get install unbound   配置unbound  unbound安装完成后会在/etc/unbound目录下生成相应的配置文件
+ 配置基本功能，在/etc/unbound/unbound.conf文件中增加如下内容:
+server: verbosity: 1 num-threads: 2 #线程数，设置与cpu核数相同，可提高unbound的cpu利用率 interface: 0.0.0.0 #监听地址，如果只想某一网络访问，填写该对应ip即可 interface: ::0 #ipv6配置，同上 port: 53 #端口 so-reuseport: yes #为每个线程的传入查询打开专用侦听套接字。可以更均匀地将传入查询分布到线程 cache-min-ttl: 60 #解析最小缓存时间 cache-max-ttl: 600 #解析最大缓存时间 outgoing-range: 8192 access-control: 192.</description>
+    </item>
     
     <item>
       <title>Nginx学习笔记之简介与编译指南</title>
