@@ -4,11 +4,20 @@
     <title>Blogs - Nrehearsal</title>
     <link rel="stylesheet" href="https://blog.return0.top/css/crab.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=3.0">
-    <meta name="generator" content="Hugo 0.49.2" />
+    <meta name="generator" content="Hugo 0.50-DEV" />
 
 
 
     
+	<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?19e32cacf39b689df48d718b117cbda6";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
 
   </head>
   <body>
@@ -55,6 +64,70 @@
 
 
 
+  
+    <h2><a href="https://blog.return0.top/blog/2018/11/%E4%BD%BF%E7%94%A8unbound%E6%90%AD%E5%BB%BAdns%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%85%8D%E7%BD%AE%E7%BC%93%E5%AD%98%E4%BB%A5%E5%8F%8A%E9%98%B2%E6%AD%A2dns%E6%B1%A1%E6%9F%93/">使用unbound搭建DNS服务器，配置缓存以及防止DNS污染</a></h2>
+    <p class="timestamp">November 25, 2018</p>
+    <div class="content">
+    真理是时间之产物，而不是权威之产物 ——弗兰西斯·培根
+  使用unbound搭建DNS服务器，配置缓存以及防止DNS污染
+Unbound is a validating, recursive, caching DNS resolver. It is designed to be fast and lean and incorporates modern features based on open standards.
+搭建环境  ubuntu_server16.04
+ 1Core, 1G
+ 能够通过代理访问国外DNS服务器(8.8.8.8，1.1.1.1等)，因为如果直接通过国内路线访问上述DNS，某些域名会得到错误的ip地址。
+  安装unbound  源码安装：下载unbound，更具官方教程安装
+ 仓库安装:
+$ sudo apt-get update $ sudo apt-get install unbound   配置unbound  unbound安装完成后会在/etc/unbound目录下生成相应的配置文件
+ 配置基本功能，在/etc/unbound/unbound.conf文件中增加如下内容:
+server: verbosity: 1 num-threads: 2 #线程数，设置与cpu核数相同，可提高unbound的cpu利用率 interface: 0.0.0.0 #监听地址，如果只想某一网络访问，填写该对应ip即可 interface: ::0 #ipv6配置，同上 port: 53 #端口 so-reuseport: yes #为每个线程的传入查询打开专用侦听套接字。可以更均匀地将传入查询分布到线程 cache-min-ttl: 60 #解析最小缓存时间 cache-max-ttl: 600 #解析最大缓存时间 outgoing-range: 8192 access-control: 192.
+    
+      ... <a href="https://blog.return0.top/blog/2018/11/%E4%BD%BF%E7%94%A8unbound%E6%90%AD%E5%BB%BAdns%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%85%8D%E7%BD%AE%E7%BC%93%E5%AD%98%E4%BB%A5%E5%8F%8A%E9%98%B2%E6%AD%A2dns%E6%B1%A1%E6%9F%93/">Read more &hellip;</a>
+    
+    </div>
+    
+  
+    <h2><a href="https://blog.return0.top/blog/2018/11/nginx%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%B9%8B%E7%AE%80%E4%BB%8B%E4%B8%8E%E7%BC%96%E8%AF%91%E6%8C%87%E5%8D%97/">Nginx学习笔记之简介与编译指南</a></h2>
+    <p class="timestamp">November 18, 2018</p>
+    <div class="content">
+    身为一个中国人，最大的痛苦是忍受别人“推己及人”的次数，比世界上任何地方的人都要多。&ndash;王小波
+  nginx主要应用场景 nginx一般作为网络的边缘节点，主要有以下三个应用场景   静态资源服务器
+使用nginx提供本地文件的网络访问服务
+ 反向代理服务器
+缓存：缓存上游服务的不常改变的内容，直接由nginx提供，减少用户访问时延。
+负载均衡服务器：方便动态扩容，和容灾，提高服务的可用和可靠性。
+ 高性能API服务器：当应用服务的性能达到瓶颈，可使用nginx和nginx支持动态语言(如JavaScript，Lua)，由nginx直接访问缓存服务和数据库服务，直接提供API功能，或者作为web防火墙，如OpenResty等。
+  nginx的四个主要的组成部分  nginx二进制可执行文件：nginx与其模块编译生成的文件
+ nginx.conf配置文件：控制nginx的行为
+ access.log访问日志：记录每一条http请求信息
+ error.log错误日志：定位错误发生位置
+  版本选择  官方开源版本：推荐使用的版本，源代码开放，可根据业务需求灵活配置。
+ 官方商业版本：在整合第三方模块，运营监控，技术支持上有很多优点，缺点就是不开源。
+ Tengine：阿里巴巴出品，虽然很多特性领先于官方版本，但无法与nginx同步升级，如无特定需求，不推荐使用。
+ OpenResty开源版：使用lua语言开发第三方模块，兼具高性能和高开发效率。
+ OpenResty商业版：OpenResty的商业版本，开箱即用。
+  编译指南 为了方便添加第三方模块，编译安装的方式比从直接软件仓库安装更常用。
+ 源代码下载：从nginx.org下载nginx源代码
+ 源代码目录结构
+total 764 drwxr-xr-x 8 ubuntu ubuntu 4096 Nov 6 21:52 ./ drwxrwxr-x 3 ubuntu ubuntu 4096 Nov 18 18:13 ../ drwxr-xr-x 6 ubuntu ubuntu 4096 Nov 18 18:13 auto/ -rw-r--r-- 1 ubuntu ubuntu 287441 Nov 6 21:52 CHANGES -rw-r--r-- 1 ubuntu ubuntu 438114 Nov 6 21:52 CHANGES.
+    
+      ... <a href="https://blog.return0.top/blog/2018/11/nginx%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%B9%8B%E7%AE%80%E4%BB%8B%E4%B8%8E%E7%BC%96%E8%AF%91%E6%8C%87%E5%8D%97/">Read more &hellip;</a>
+    
+    </div>
+    
+  
+    <h2><a href="https://blog.return0.top/blog/2018/11/%E4%BD%BF%E7%94%A8wireguard%E6%90%AD%E5%BB%BAvpn%E6%9C%8D%E5%8A%A1/">使用wireguard搭建VPN服务</a></h2>
+    <p class="timestamp">November 11, 2018</p>
+    <div class="content">
+    活了一百年却只能记住30M字节是荒谬的。你知道，这比一张压缩盘还要少。人类境况正在变得日趋退。&ndash;Marvin Minsky
+  使用wireguard搭建VPN服务
+wireguard是一款新型的，快速的，安全的VPN软件，将来可能会正式并入linux内核。wireguard搭建十分简单，不需要像strongswan，openvpn那样配置繁琐的认证证书，以及网络接口，总的配置文件也不会超过50行。
+安装wireguard  $ sudo add-apt-repository ppa:wireguard/wireguard $ sudo apt-get update $ sudo apt-get install wireguard   生成密钥对  wg genkey | tee privatekey | wg pubkey &gt; publickey  命令执行完成后，将在当前目录下生成privateKey, publicKey两个文件，分别包含了公钥和私钥
+  开启内核转发  编辑/etc/sysctl.conf文件，找到net.ipv4.ip_forward=1，并去掉这一行的注释  配置文件编写  在/etc/wireguard/目录下，新建文件wg0.conf， 文件名字可以任意取，文件内容如下:
+ [Interface] //本端信息 Address = 192.168.142.1/32 //本端ip SaveConfig = true PostUp = iptables -A FORWARD -i wg0 -j ACCEPT; iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE; ip6tables -A FORWARD -i wg0 -j ACCEPT; ip6tables -t nat -A POSTROUTING -o eth0 -j MASQUERADE PostDown = iptables -D FORWARD -i wg0 -j ACCEPT; iptables -t nat -D POSTROUTING -o eth0 -j MASQUERADE; ip6tables -D FORWARD -i wg0 -j ACCEPT; ip6tables -t nat -D POSTROUTING -o eth0 -j MASQUERADE ListenPort = 56632 //监听端口，任意指定即可 PrivateKey = //服务端的私钥 [Peer] //对端信息 PublicKey = //对端的公钥，即客户端的公钥，每个客户端也需要生成一对公私钥。 AllowedIPs = 192.
+    
+      ... <a href="https://blog.return0.top/blog/2018/11/%E4%BD%BF%E7%94%A8wireguard%E6%90%AD%E5%BB%BAvpn%E6%9C%8D%E5%8A%A1/">Read more &hellip;</a>
+    
+    </div>
+    
   
     <h2><a href="https://blog.return0.top/blog/2018/11/%E4%BD%BF%E7%94%A8kubeadmin%E6%90%AD%E5%BB%BAkubernetes%E9%9B%86%E7%BE%A4%E4%B8%80/">使用kubeadmin搭建kubernetes集群(一)</a></h2>
     <p class="timestamp">November 5, 2018</p>

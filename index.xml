@@ -6,10 +6,22 @@
     <description>Recent content on Nrehearsal</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 25 Nov 2018 18:33:14 +0800</lastBuildDate>
+    <lastBuildDate>Sun, 09 Dec 2018 20:55:03 +0800</lastBuildDate>
     
 	<atom:link href="https://blog.return0.top/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>golang操作unix系统信号</title>
+      <link>https://blog.return0.top/blog/2018/12/golang%E6%93%8D%E4%BD%9Cunix%E7%B3%BB%E7%BB%9F%E4%BF%A1%E5%8F%B7/</link>
+      <pubDate>Sun, 09 Dec 2018 20:55:03 +0800</pubDate>
+      
+      <guid>https://blog.return0.top/blog/2018/12/golang%E6%93%8D%E4%BD%9Cunix%E7%B3%BB%E7%BB%9F%E4%BF%A1%E5%8F%B7/</guid>
+      <description>你在活着的同时，也在学习着，无论如何，你活着。&amp;ndash;道格拉斯·亚当斯
+  golang操作unix系统信号
+什么是信号 在计算机科学中，信号（英语：Signals）是Unix、类Unix以及其他POSIX兼容的操作系统中进程间通讯的一种有限制的方式。 它是一种异步的通知机制，用来提醒进程一个事件已经发生。当一个信号发送给一个进程，操作系统中断了进程正常的控制流程， 此时，任何非原子操作都将被中断。如果进程定义了信号的处理函数，那么它将被执行，否则就执行默认的处理函数。   linux系统有哪些信号
+$ kill -l 1) SIGHUP 2) SIGINT 3) SIGQUIT 4) SIGILL 5) SIGTRAP 6) SIGABRT 7) SIGBUS 8) SIGFPE 9) SIGKILL 10) SIGUSR1 11) SIGSEGV 12) SIGUSR2 13) SIGPIPE 14) SIGALRM 15) SIGTERM 16) SIGSTKFLT 17) SIGCHLD 18) SIGCONT 19) SIGSTOP 20) SIGTSTP 21) SIGTTIN 22) SIGTTOU 23) SIGURG 24) SIGXCPU 25) SIGXFSZ 26) SIGVTALRM 27) SIGPROF 28) SIGWINCH 29) SIGIO 30) SIGPWR 31) SIGSYS 34) SIGRTMIN 35) SIGRTMIN+1 36) SIGRTMIN+2 37) SIGRTMIN+3 38) SIGRTMIN+4 39) SIGRTMIN+5 40) SIGRTMIN+6 41) SIGRTMIN+7 42) SIGRTMIN+8 43) SIGRTMIN+9 44) SIGRTMIN+10 45) SIGRTMIN+11 46) SIGRTMIN+12 47) SIGRTMIN+13 48) SIGRTMIN+14 49) SIGRTMIN+15 50) SIGRTMAX-14 51) SIGRTMAX-13 52) SIGRTMAX-12 53) SIGRTMAX-11 54) SIGRTMAX-10 55) SIGRTMAX-9 56) SIGRTMAX-8 57) SIGRTMAX-7 58) SIGRTMAX-6 59) SIGRTMAX-5 60) SIGRTMAX-4 61) SIGRTMAX-3 62) SIGRTMAX-2 63) SIGRTMAX-1 64) SIGRTMAX  信号的产生方式</description>
+    </item>
     
     <item>
       <title>使用unbound搭建DNS服务器，配置缓存以及防止DNS污染</title>
