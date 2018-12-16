@@ -6,10 +6,29 @@
     <description>Recent content in Blogs on Nrehearsal</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 09 Dec 2018 20:55:03 +0800</lastBuildDate>
+    <lastBuildDate>Sun, 16 Dec 2018 20:06:12 +0800</lastBuildDate>
     
 	<atom:link href="https://blog.return0.top/blog/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>linux内核参数rp_filter对策略路由的影响</title>
+      <link>https://blog.return0.top/blog/2018/12/linux%E5%86%85%E6%A0%B8%E5%8F%82%E6%95%B0rp_filter%E5%AF%B9%E7%AD%96%E7%95%A5%E8%B7%AF%E7%94%B1%E7%9A%84%E5%BD%B1%E5%93%8D/</link>
+      <pubDate>Sun, 16 Dec 2018 20:06:12 +0800</pubDate>
+      
+      <guid>https://blog.return0.top/blog/2018/12/linux%E5%86%85%E6%A0%B8%E5%8F%82%E6%95%B0rp_filter%E5%AF%B9%E7%AD%96%E7%95%A5%E8%B7%AF%E7%94%B1%E7%9A%84%E5%BD%B1%E5%93%8D/</guid>
+      <description>爱国主义就是积极地为了微不足道的原因杀人并被杀。——勃特兰·罗素
+  linux内核参数rp_filter对策略路由的影响
+环境说明  vpn软件如openvpn，wireguard等，通过配置这样两条路由
+0.0.0.0/1 via vpn_gateway dev tun0
+128.0.0.0/1 via vpn_gateway dev tun0
+来实现全局路由，这两条路由的含义如下:
+0.0.0.0/128.0.0.0 = 0.0.0.0/1 = 0.0.0.0 TO 127.255.255.255
+128.0.0.0/128.0.0.0 = 128.0.0.0/1 = 128.0.0.0 TO 255.255.255.255
+即除了127.0.0.0这个网络外的所有流量都通过VPN出去。
+ 如果只想特定的流量通过vpn，我们可以这样配置，例如只让8.8.8.8通过vpn
+//为路由表vpn_route_table添加默认路由 $ ip route add default via vpn_gateway dev tun0 table vpn_route_table //添加策略，只有fwmark为0xffff的数据包使用vpn_route_table查询路由 $ ip rule add fwmark 0xffff table vpn_route_table //在mangle表中的OUTPUT链上为目的地址为8.8.8.8的数据包打上标签 $ iptables -t mangle -A OUTPUT -d 8.8.8.8 -j MARK --set-mark 0xffff //以下配置是为了将mark设置到整个网络连接过程中 $ iptables -t mangle -A OUTPUT -j CONNMARK --save-mark $ iptables -t mangle -A PREROUTING -j CONNMARK --restore-mark //为tun0接口设置nat $ iptables -t nat -A POSTROUTING -o tun0 -j MASQUERADE  配置完成后，发现不能正常访问8.</description>
+    </item>
     
     <item>
       <title>golang操作unix系统信号</title>
