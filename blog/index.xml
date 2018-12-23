@@ -6,10 +6,22 @@
     <description>Recent content in Blogs on Nrehearsal</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 16 Dec 2018 20:06:12 +0800</lastBuildDate>
+    <lastBuildDate>Sun, 23 Dec 2018 20:58:26 +0800</lastBuildDate>
     
 	<atom:link href="https://blog.return0.top/blog/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>一个http查询代理说明go语言context的基本用法</title>
+      <link>https://blog.return0.top/blog/2018/12/%E4%B8%80%E4%B8%AAhttp%E6%9F%A5%E8%AF%A2%E4%BB%A3%E7%90%86%E8%AF%B4%E6%98%8Ego%E8%AF%AD%E8%A8%80context%E7%9A%84%E5%9F%BA%E6%9C%AC%E7%94%A8%E6%B3%95/</link>
+      <pubDate>Sun, 23 Dec 2018 20:58:26 +0800</pubDate>
+      
+      <guid>https://blog.return0.top/blog/2018/12/%E4%B8%80%E4%B8%AAhttp%E6%9F%A5%E8%AF%A2%E4%BB%A3%E7%90%86%E8%AF%B4%E6%98%8Ego%E8%AF%AD%E8%A8%80context%E7%9A%84%E5%9F%BA%E6%9C%AC%E7%94%A8%E6%B3%95/</guid>
+      <description>首先他们无视于你，而后是嘲笑你，接着是批斗你，再来就是你的胜利之日。&amp;ndash;甘地
+  因为golang在创建goroutine的时候不会像C语言创建进程线程那样返回一个pid或theard_id，这样就没办法很方便的管理每个gorouting， 如果各个goroutine中还存在相互调用的情况，那么管理这些goroutine将会变的非常困难， context包就提供了一种统一管理gorouinte，以及在goroutine之间安全传递参数的方法
+实例说明 查询操作通常会耗费比较长的时间，使用一个代理服务器来管理查询可以降低服务器的压力， 还可以方便的对客户端进行一些前期的管理，参考blog.golang.org上的example。  main.go func main() { log.SetFlags(log.Ltime | log.Lshortfile) router := httprouter.New() router.GET(&amp;quot;/search&amp;quot;, handler.Search) http.ListenAndServe(&amp;quot;:8000&amp;quot;, router) }  创建一个简单的http服务，提供/search路由。
+userip/userip.go const userIPKey int = 1 func SetValueWithContext(ctx context.Context, userIP string) context.Context { return context.WithValue(ctx, userIPKey, userIP) } func GetValueWithContext(ctx context.Context) (string, bool) { userIP, ok := ctx.Value(userIPKey).(string) if !ok { return &amp;quot;&amp;quot;, false } return userIP, true }  实现context的Get/Set方法，即通过context在goroutine间传递参数</description>
+    </item>
     
     <item>
       <title>linux内核参数rp_filter对策略路由的影响</title>

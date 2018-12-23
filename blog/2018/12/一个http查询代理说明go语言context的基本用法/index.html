@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>一个http查询代理说明go语言context的基本用法 - Nrehearsal</title>
+    <link rel="stylesheet" href="https://blog.return0.top/css/crab.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=3.0">
+    <meta name="generator" content="Hugo 0.49.2" />
+
+
+
+    
+	<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?19e32cacf39b689df48d718b117cbda6";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+  </head>
+  <body>
+
+    <div id="container">
+
+      <div id="header">
+
+        <div id="site-logo">
+          
+            <img src="https://blog.return0.top/img/logo.jpg">
+          
+        </div>
+
+	<div id="site-title"><a href="https://blog.return0.top/">Nrehearsal</a></div>
+	<div id="site-slogan">Life has no rehearsal</div>
+
+      </div>
+
+            <nav>
+	<ul class="first">
+          
+            <li><a href="/">Home</a>
+	    
+	    </li>
+	  
+            <li><a href="/blog/">Blog</a>
+	    
+	    </li>
+	  
+            <li><a href="/contact/">Contact</a>
+	    
+	    </li>
+	  
+	</ul>
+      </nav>
+
+
+      <div id="content">
+
+        <div id="article">
+	  <h1>一个http查询代理说明go语言context的基本用法</h1>
+
+
+<p class="timestamp">December 23, 2018</p>
+
+
+
+<div id="summary">
+  <blockquote>
+<p>首先他们无视于你，而后是嘲笑你，接着是批斗你，再来就是你的胜利之日。&ndash;甘地</p>
+</blockquote>
+
+</div>
+
+
+<p>因为golang在创建goroutine的时候不会像C语言创建进程线程那样返回一个pid或theard_id，这样就没办法很方便的管理每个gorouting，
+如果各个goroutine中还存在相互调用的情况，那么管理这些goroutine将会变的非常困难，
+context包就提供了一种统一管理gorouinte，以及在goroutine之间安全传递参数的方法</p>
+
+<h3 id="实例说明">实例说明</h3>
+
+<pre><code>查询操作通常会耗费比较长的时间，使用一个代理服务器来管理查询可以降低服务器的压力，
+还可以方便的对客户端进行一些前期的管理，参考blog.golang.org上的example。
+</code></pre>
+
+<h3 id="main-go">main.go</h3>
+
+<pre><code class="language-go">func main() {
+	log.SetFlags(log.Ltime | log.Lshortfile)
+	router := httprouter.New()
+	router.GET(&quot;/search&quot;, handler.Search)
+
+	http.ListenAndServe(&quot;:8000&quot;, router)
+}
+</code></pre>
+
+<p>创建一个简单的http服务，提供/search路由。</p>
+
+<h3 id="userip-userip-go">userip/userip.go</h3>
+
+<pre><code class="language-go">const userIPKey int = 1
+
+func SetValueWithContext(ctx context.Context, userIP string) context.Context {
+	return context.WithValue(ctx, userIPKey, userIP)
+}
+
+func GetValueWithContext(ctx context.Context) (string, bool) {
+	userIP, ok := ctx.Value(userIPKey).(string)
+	if !ok {
+		return &quot;&quot;, false
+	}
+	return userIP, true
+}
+</code></pre>
+
+<p>实现context的Get/Set方法，即通过context在goroutine间传递参数</p>
+
+<h3 id="handler-handler-go">handler/handler.go</h3>
+
+<pre><code class="language-go">func Search(w http.ResponseWriter, req *http.Request, p httprouter.Params) {
+	var ctx context.Context
+	var cancel context.CancelFunc
+	
+	queryWord := req.URL.Query().Get(&quot;query_word&quot;)
+	if queryWord == &quot;&quot; {
+		http.Error(w, &quot;no query word&quot;, http.StatusBadRequest)
+		return
+	}
+
+	hostIP := req.RemoteAddr
+	if hostIP == &quot;&quot; {
+		http.Error(w, &quot;failed to get client addr&quot;, http.StatusBadRequest)
+	}
+	
+	timeoutParam := req.URL.Query().Get(&quot;timeout&quot;)
+	if timeout, err := time.ParseDuration(timeoutParam); err != nil {
+		ctx, cancel = context.WithCancel(context.Background())
+		log.Println(&quot;param timeout does not set&quot;)
+	} else {
+		log.Println(&quot;context set with timeout&quot;)
+		ctx, cancel = context.WithTimeout(context.Background(), timeout)
+	}
+	defer cancel()
+
+	ctx = userip.SetValueWithContext(ctx, hostIP)
+
+	result, err := searchProxy.Search(ctx, queryWord)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	w.WriteHeader(http.StatusOK)
+	io.WriteString(w, result)
+	log.Println(err)
+	return
+}
+</code></pre>
+
+<ul>
+<li><p>代码说明：</p>
+
+<ul>
+<li>首先根据客户端的参数判断请求是否合法</li>
+<li>根据客户端是否传入超时参数，确定是否创建携带超时参数的context</li>
+<li>将客户端的ip存入context，并将context传递给代理查询方法searchProxy.Search</li>
+<li>使用defer调用context的cancel方法
+<br /></li>
+</ul></li>
+</ul>
+
+<h3 id="searchproxy-search-go">searchProxy/search.go</h3>
+
+<pre><code class="language-go">func Search(ctx context.Context, queryWord string) (string, error) {
+	req, err := http.NewRequest(&quot;GET&quot;, &quot;http://8.8.8.8:8066/test.html&quot;, nil)
+	if err != nil {
+		return &quot;&quot;, err
+	}
+
+	queryUrl := req.URL.Query()
+	queryUrl.Set(&quot;query_word&quot;, queryWord)
+
+	if userIP, ok := userip.GetValueWithContext(ctx); ok {
+		log.Println(userIP)
+		queryUrl.Set(&quot;user_ip&quot;, userIP)
+	}
+	req.URL.RawQuery = queryUrl.Encode()
+
+	log.Println(req.URL.String())
+
+	var result string
+	err = httpDo(ctx, req, func(resp *http.Response, err error) (error) {
+		if err != nil {
+			return err
+		}
+		defer resp.Body.Close()
+
+		data, err := ioutil.ReadAll(resp.Body)
+		if err != nil {
+			return err
+		}
+
+		//TODO result parse
+		result = string(data)
+		return nil
+	})
+
+	return result, err
+}
+
+func httpDo(ctx context.Context, req *http.Request, f func(*http.Response, error) error) error {
+	c := make(chan error, 1)
+	req = req.WithContext(ctx)
+	go func() { c &lt;- f(http.DefaultClient.Do(req)) }()
+
+	select {
+	case &lt;-ctx.Done():
+		&lt;-c
+		log.Println(ctx.Err())
+		return ctx.Err()
+	case err := &lt;-c:
+		return err
+	}
+}
+</code></pre>
+
+<ul>
+<li>代码说明
+
+<ul>
+<li>从context取出参数&rdquo;userip&rdquo;，并作为请求的参数</li>
+<li>将context传递给requset方法，并执行http请求</li>
+<li>根据http的response和context的Done()方法，确定返回内容</li>
+<li>其中httpDo的参数f，为请求的response和context的返回值处理方法</li>
+</ul></li>
+</ul>
+
+<h3 id="总结">总结</h3>
+
+<ul>
+<li>context在goroutine间的最好为显示传递，即通过参数传递</li>
+<li>context.Background是所有context的root，不能被cancel</li>
+<li>context的Err方法会返回，context被取消的原因</li>
+<li>context在可以多个goroutine间被安全的使用</li>
+<li>代码只是根据官网的example做了修改，context包内其他方法的使用，请参考godoc
+<br /></li>
+</ul>
+
+<p>参考链接：</p>
+
+<ul>
+<li><a href="https://blog.golang.org/context">Go Concurrency Patterns: Context</a></li>
+</ul>
+
+
+        </div>
+
+      </div>
+
+      <div id="footer">
+        Copyright 2018 @return0.top
+      </div>
+
+    </div>
+
+  </body>
+</html>
+
